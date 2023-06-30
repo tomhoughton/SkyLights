@@ -54,6 +54,8 @@ def main():
             data['current']['temp_c'],
             data['current']['uv'],
         )
+        
+        
 
         # dbug display:
         dbug_display_weather(weather_update)

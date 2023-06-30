@@ -4,6 +4,9 @@ class Weather:
         self.temp = temp
         self.uv = uv
 
+        # read the json file containing colors for weather:
+        
+
 
     def get_condition(self):
         return self.condition
