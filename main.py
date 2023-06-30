@@ -20,16 +20,26 @@ def dbug_display_weather(weather_update):
     print(weather_update.get_uv())
 
 
-def dev_colour_view():
-    height = 500
-    width = 500 * 4
-    image = PIL.Image.new('RGB', (height, width),  (255, 0, 0))
+def dev_colour_view(color01, color02, color03, color04):
+    height = 250
+    width = 250 * 4
+    image = PIL.Image.new('RGB', (width, height),  (255, 0, 0))
     
     for y in range(0, height):
         for x in range(0, width):
-            image.putpixel((x, y), (255, 255, 1))
+
+            # Color each square:
+            if (x > 0 and x < height * 1):
+                image.putpixel((x, y), color01)
+            elif (x > height * 1 and x < height * 2):
+                image.putpixel((x, y), color02)
+            elif (x > height * 2 and x < height * 3):
+                image.putpixel((x, y), color03)
+            elif (x > height * 3 and x < height * 4):
+                image.putpixel((x, y), color04)
     
     image.show()
+    image.close()
 
 def main():
 
@@ -49,7 +59,12 @@ def main():
         dbug_display_weather(weather_update)
         
         # dbugImage:
-        dev_colour_view()
+        dev_colour_view(
+            (255, 0, 0),
+            (255, 255, 0),
+            (0, 255, 0),
+            (0, 0, 255)
+        )
 
         # Api timer:
         time.sleep(api_update_timer)
