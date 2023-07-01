@@ -4,10 +4,9 @@ import requests
 import PIL.Image, PIL.ImageDraw
 import time
 
-# Imformation we need:
-#condition.text
-# uv
-#temp_c
+# So now we need to generate a video of frames: 
+
+
 def get_data():
     res = requests.get('http://api.weatherapi.com/v1/current.json?key=e50ea9607d6740b08ac231014232906&q=SG189FX&aqi=no')
     return res.json()
@@ -55,11 +54,7 @@ def main():
             data['current']['uv'],
         )
         
-        # dbug display:
-        dbug_display_weather(weather_update)
-        
-        print('condition colors')
-        print(weather_update.get_condition_colors())
+        # Get the condition colors:
         condition_colors = weather_update.get_condition_colors()
 
         # dbugImage:
