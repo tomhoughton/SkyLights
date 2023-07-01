@@ -55,17 +55,19 @@ def main():
             data['current']['uv'],
         )
         
-        
-
         # dbug display:
         dbug_display_weather(weather_update)
         
+        print('condition colors')
+        print(weather_update.get_condition_colors())
+        condition_colors = weather_update.get_condition_colors()
+
         # dbugImage:
         dev_colour_view(
-            (255, 0, 0),
-            (255, 255, 0),
-            (0, 255, 0),
-            (0, 0, 255)
+            condition_colors[0],
+            condition_colors[1],
+            condition_colors[2],
+            condition_colors[3]
         )
 
         # Api timer:
