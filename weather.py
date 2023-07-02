@@ -1,7 +1,7 @@
 import json
 
 class Weather:
-    def __init__(self, condition, temp, uv) -> None:
+    def __init__(self, condition, temp, uv):
         self.condition = condition
         self.temp = temp
         self.uv = uv

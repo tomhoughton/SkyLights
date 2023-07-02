@@ -3,9 +3,8 @@ import json
 import requests
 import PIL.Image, PIL.ImageDraw
 import time
-
+import cv2
 # So now we need to generate a video of frames: 
-
 
 def get_data():
     res = requests.get('http://api.weatherapi.com/v1/current.json?key=e50ea9607d6740b08ac231014232906&q=SG189FX&aqi=no')
