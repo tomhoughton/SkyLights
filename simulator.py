@@ -12,7 +12,7 @@ class Simulator:
         self.width = self.height * 4
 
         # Stores all frames file names:
-        self.frames = [];
+        self.frames = []
         pass
 
     def create_frame(self, color01, color02, color03, color04, frame_name):
@@ -36,8 +36,8 @@ class Simulator:
         
         frame_file_name = "{}.jpg".format(frame_name)
         new_frame.save(
-            os.path.join(self.frame_eport_path,frame_file_name
-        ))
+            os.path.join(self.frame_eport_path,frame_file_name)
+        )
         self.frames.append(frame_file_name)
 
     def write_video(self):
