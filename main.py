@@ -4,6 +4,7 @@ import requests
 import PIL.Image, PIL.ImageDraw
 import time
 import cv2
+from simulator import Simulator
 # So now we need to generate a video of frames: 
 
 def get_data():
@@ -17,29 +18,15 @@ def dbug_display_weather(weather_update):
     print(weather_update.get_temp())
     print(weather_update.get_uv())
 
-
-def dev_colour_view(color01, color02, color03, color04):
-    height = 250
-    width = 250 * 4
-    image = PIL.Image.new('RGB', (width, height),  (255, 0, 0))
-    
-    for y in range(0, height):
-        for x in range(0, width):
-
-            # Color each square:
-            if (x > 0 and x < height * 1):
-                image.putpixel((x, y), color01)
-            elif (x > height * 1 and x < height * 2):
-                image.putpixel((x, y), color02)
-            elif (x > height * 2 and x < height * 3):
-                image.putpixel((x, y), color03)
-            elif (x > height * 3 and x < height * 4):
-                image.putpixel((x, y), color04)
-    
-    image.show()
-    image.close()
-
 def main():
+
+    SIM_MODE = True
+    sim = None
+    sim_frame_count = None
+
+    if (SIM_MODE):
+        sim = Simulator()
+        sim_frame_count = 0
 
     api_update_timer = 1 # Controls how often we get new data.
 
@@ -57,15 +44,21 @@ def main():
         condition_colors = weather_update.get_condition_colors()
 
         # dbugImage:
-        dev_colour_view(
-            condition_colors[0],
-            condition_colors[1],
-            condition_colors[2],
-            condition_colors[3]
-        )
+        if (SIM_MODE):
+            sim.create_frame(
+                condition_colors[0],
+                condition_colors[1],
+                condition_colors[2],
+                condition_colors[3],
+                sim_frame_count
+            )
+            sim_frame_count += 1
 
         # Api timer:
         time.sleep(api_update_timer)
+
+        if (SIM_MODE):
+            sim.display_frame_data()
 
 
 main()
