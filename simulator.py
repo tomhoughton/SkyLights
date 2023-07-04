@@ -1,5 +1,6 @@
 import os
 import PIL.Image, PIL.ImageDraw
+import cv2
 
 class Simulator:
     def __init__(self) -> None:
@@ -38,6 +39,28 @@ class Simulator:
             os.path.join(self.frame_eport_path,frame_file_name
         ))
         self.frames.append(frame_file_name)
+
+    def write_video(self):
+        if len(self.frames) > 0:
+            # Store the opened frames:
+            new_frames = []
+
+            for frame in self.frames:
+                # Open frame:
+                img = cv2.imread(os.path.join(self.frame_eport_path, frame))
+                hieght, width, layers = img.shape
+                size = (width, height)
+                new_frames.append(img)
+
+            # Create a video out object:
+            out = cv2.VideoWriter('project.avi', cv2.VideoWriter_fourcc(*'DIVX'), 60, size)
+
+            # Write frames to out:
+            for i in range(len(new_frames)):
+                out.write(new_frames[i])
+
+            # Release the video:
+            out.release()
 
     def display_frame_data(self):
         print(self.frames)
